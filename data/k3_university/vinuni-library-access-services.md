@@ -299,4 +299,3 @@ You will get email reminders to return or renew items but not getting one doesnâ
 Fines may be waived only in serious cases, like illness or hospitalization (proof needed).
 
 To appeal a fine, email: [emailÂ protected] (decided case by case).
-

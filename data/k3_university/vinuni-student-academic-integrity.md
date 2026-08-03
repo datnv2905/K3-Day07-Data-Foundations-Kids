@@ -564,4 +564,3 @@ Gaining unauthorized access to exam question papers or submitted answers.
 Second attempt. Criminal proceedings if applicable
 Gain or grant authorized access
 Attempted/unsuccessful unauthorized access
-

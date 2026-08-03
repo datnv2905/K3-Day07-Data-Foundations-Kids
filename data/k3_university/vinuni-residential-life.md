@@ -222,4 +222,3 @@ Appendix II: Off-campus residential policy (Specific guidelines)
 Appendix III: Examples of Code of Conduct Violations in Both On-Campus and Off-Campus Housing
 
 University Directory: College Contacts, Administrative Contacts, Emergency Contacts
-

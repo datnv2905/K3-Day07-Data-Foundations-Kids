@@ -882,4 +882,3 @@ The Provost has the authority to adjust, supplement, amend, and promulgate these
 APPENDIX
 
 Attendance Policy at Medical Doctor Program
-

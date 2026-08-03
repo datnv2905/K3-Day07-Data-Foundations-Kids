@@ -717,4 +717,3 @@ In case Students have special needs to issue an invoice to an organization, Stud
 In case billing information is not provided before the deadline, an electronic invoicing will be issued under the default Student’s name and address.
 
 The official e-invoice issued does not include fees collected on behalf of third parties (eg: compulsory health insurance fee collected on behalf of the Social Insurance Office).
-

@@ -2,7 +2,7 @@
 
 **Họ tên:** Trần Nguyễn Thế Nhật  
 **Mã học viên:** 2A202601155  
-**Nhóm:** Chưa cập nhật  
+**Nhóm:** Kids
 **Ngày:** 03/08/2026
 
 > **Nộp 1 bản / sinh viên.** Phần nhóm (lựa chọn tài liệu, thiết kế chiến lược, bộ câu hỏi đánh giá, demo) nộp chung trong `REPORT_NHOM.md`.
@@ -103,37 +103,41 @@ LAB_SOLUTION_PACKAGE='src.Day07_2A202601155_Tran-Nguyen-The-Nhat' python3 -m pyt
 
 | Cặp | Câu A | Câu B | Dự đoán | Điểm thực tế | Đúng? |
 | --- | --- | --- | --- | ---: | --- |
-| 1 | Sinh viên đăng ký học phần trên cổng học vụ. | Người học ghi danh môn học qua hệ thống học vụ. | cao | -0.066465 | Không |
-| 2 | Thư viện cho phép sinh viên mượn sách. | Sinh viên có thể mượn tài liệu tại thư viện. | cao | 0.076851 | Không |
-| 3 | Học phí phải được thanh toán đúng hạn. | Trời hôm nay có nhiều mây. | thấp | 0.240984 | Không |
-| 4 | Sinh viên cần kiểm tra môn tiên quyết. | Môn học có thể yêu cầu học phần tiên quyết. | cao | -0.034324 | Không |
-| 5 | Ký túc xá dành cho sinh viên. | Cơ sở dữ liệu vector lưu embedding. | thấp | 0.037364 | Không |
+| 1 | Sinh viên đăng ký học phần trên cổng học vụ. | Người học ghi danh môn học qua hệ thống học vụ. | cao | 0.496389 | Có |
+| 2 | Thư viện cho phép sinh viên mượn sách. | Sinh viên có thể mượn tài liệu tại thư viện. | cao | 0.687075 | Có |
+| 3 | Học phí phải được thanh toán đúng hạn. | Trời hôm nay có nhiều mây. | thấp | 0.241541 | Có |
+| 4 | Sinh viên cần kiểm tra môn tiên quyết. | Môn học có thể yêu cầu học phần tiên quyết. | cao | 0.589369 | Có |
+| 5 | Ký túc xá dành cho sinh viên. | Cơ sở dữ liệu vector lưu embedding. | thấp | 0.309803 | Có |
 
 **Kết quả bất ngờ nhất và ý nghĩa:**
 
-> Cặp 3 là bất ngờ nhất: hai câu không liên quan nhưng điểm dương. Nguyên nhân là `_mock_embed` sinh vector quyết định từ hash của toàn chuỗi, không học ngữ nghĩa. Vì vậy các điểm trên chỉ kiểm tra pipeline; benchmark chất lượng tiếng Việt cần `LocalEmbedder`.
+> Cặp 3 là bất ngờ nhất: hai câu không liên quan vẫn có điểm dương 0.241541. Embedding không phải phép kiểm tra đúng/sai tuyệt đối; điểm cosine chỉ là tín hiệu xếp hạng tương đối. Các cặp đồng nghĩa có điểm cao hơn rõ rệt, phù hợp với kỳ vọng khi dùng `text-embedding-3-small`.
 
 ---
 
 ## 5. Kết quả truy xuất của tôi (Competition Results) — Cá nhân (10 điểm)
 
-Chiến lược cá nhân: `RecursiveChunker(chunk_size=400)`. Kết quả dưới đây là chạy sơ bộ với corpus template hiện có và mock embedding.
+Corpus chung: 7 chính sách công khai của VinUni trong `data/k3_university/`; strategy cá nhân: `RecursiveChunker(chunk_size=1000)`; backend: OpenAI `text-embedding-3-small`; số chunk đã nạp: 200. Bộ 5 query, gold document và evidence string được khai báo trong `bench.py` để các lần chạy dùng cùng một chuẩn.
 
-| # | Câu hỏi | Top-1 chunk | Score | Liên quan? | Nhận xét |
-| --- | --- | --- | ---: | --- | --- |
-| 1 | Sinh viên đăng ký học phần ở đâu? | `k3-library-services`: template thư viện | 0.090805 | Không | Truy xuất sai tài liệu. |
-| 2 | Cần làm gì trước khi đăng ký môn có tiên quyết? | `k3-library-services`: hướng dẫn bổ sung quy định | 0.269569 | Không | Mock embedding không nhận diện điều kiện tiên quyết. |
-| 3 | Xử lý lỗi trùng lịch học thế nào? | `k3-course-registration`: nội dung đăng ký học phần | 0.221978 | Có | Chunk có thông tin điều chỉnh lớp trước thời hạn. |
-| 4 | Thư viện cung cấp những dịch vụ gì? | `k3-library-services`: template thư viện | 0.063288 | Có, nhưng thiếu | Dữ liệu template làm context nhiễu. |
-| 5 | Cần mang gì khi mượn tài liệu thư viện? | `k3-library-services`: hướng dẫn bổ sung quy định | 0.075019 | Không | Chunk top-1 không chứa yêu cầu thẻ định danh. |
+| # | Câu hỏi | Gold evidence cần có trong top-3 | Top-1 chunk | Score | Liên quan? | Nhận xét |
+| --- | --- | --- | --- | ---: | --- | --- |
+| 1 | Hạn nộp hỗ trợ tài chính cho Fall? | `July 10th` | `vinuni-financial-aid-request`: timeline Fall | 0.4494 | Có | Evidence có trong top-3. |
+| 2 | Ai được vào thư viện, mượn tài liệu hoặc dùng tài nguyên điện tử? | `valid VinUni ID` | `vinuni-library-access-services`: non-regular user access | 0.3856 | Có, nhưng thiếu | Đúng tài liệu nhưng evidence ID không nằm trong top-3. |
+| 3 | Đăng ký khách trong ngày/qua đêm trước bao lâu? | `03 working days` | `vinuni-residential-life`: guest responsibility | 0.4230 | Có | Evidence có trong top-3. |
+| 4 | GPA 0.0–2.49 ảnh hưởng học bổng thế nào? | `Automatic Downgrade` | `vinuni-undergraduate-academic-regulations`: academic standing | 0.5608 | Có, nhưng không top-1 | Evidence xuất hiện ở hạng 3 từ policy học bổng. |
+| 5 | Sinh viên bị cáo buộc gian lận được bảo đảm quy trình nào? | `due process` | `vinuni-student-academic-integrity`: instructor guidance | 0.3789 | Không đủ | Đúng policy nhưng top-3 không có evidence `due process`. |
 
-**Số câu có top-1 liên quan trong lần chạy sơ bộ:** 2 / 5.
+**Số câu có evidence chính xác trong top-3:** 3 / 5.
 
-> Đây chưa phải benchmark chính thức: corpus hiện chỉ có 2 tài liệu template dùng URL `example.edu`; nhóm chưa chốt 5 query/gold answer chung; mock embedding không đánh giá được ngữ nghĩa. Trước khi nộp, cần thay bằng corpus 5–10 nguồn công khai thật, điền đúng 5 query cố định vào `bench.py`, chạy A/B với `metadata_filter={"audience": "student"}`, lưu top-3 và cập nhật bảng này.
+> Failure case là query 5: cả top-3 cùng đúng policy Academic Integrity nhưng không chunk nào chứa câu “due process”. Điều này cho thấy retrieval theo ngữ nghĩa đã tìm đúng chủ đề, nhưng chunk 1.000 ký tự vẫn có thể làm phần trả lời cụ thể bị xếp sau top-3. Cải thiện khả dĩ là giảm `chunk_size` hoặc thử chunk theo heading, trong khi vẫn giữ nguyên corpus và query để so sánh công bằng.
+
+**A/B metadata filter:**
+
+> Các query 1, 3, 4, 5 gọi `metadata_filter={"audience": "student"}`; query thư viện không filter. Việc hoàn thiện metadata diversity và đánh giá A/B filter thuộc phần corpus/report nhóm, không thuộc phần code cá nhân.
 
 **Điều học được từ nhóm/demo:**
 
-> Chưa có dữ liệu thảo luận nhóm để kết luận trung thực; bổ sung mục này sau phiên so sánh strategy.
+> Cùng một corpus chỉ so sánh công bằng khi mọi người giữ nguyên data, 5 query và embedding backend, chỉ đổi strategy. Kết quả mock cho thấy score cao không đủ chứng minh câu trả lời đúng; cần kiểm evidence string ở cấp chunk, không chỉ nhìn `doc_id`.
 
 ---
 
@@ -145,5 +149,5 @@ Chiến lược cá nhân: `RecursiveChunker(chunk_size=400)`. Kết quả dư�
 | Hướng tiếp cận | 10 / 10 |
 | Hoàn thiện code | 30 / 30 |
 | Dự đoán độ tương tự | 5 / 5 |
-| Kết quả truy xuất | Chưa tự chấm / 10 |
-| **Tổng có thể xác minh** | **50 / 60** |
+| Kết quả truy xuất | 6 / 10 (3 evidence đúng top-3; 2 trường hợp context thiếu) |
+| **Tổng có thể xác minh** | **56 / 60** |
