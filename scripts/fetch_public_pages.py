@@ -15,7 +15,6 @@ import time
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
@@ -123,7 +122,12 @@ def robots_allowed(url: str, user_agent: str) -> bool:
     robots_url = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
     parser = RobotFileParser(robots_url)
     try:
-        parser.read()
+        request = Request(robots_url, headers={"User-Agent": user_agent})
+        with urlopen(request, timeout=20) as response:
+            charset = response.headers.get_content_charset() or "utf-8"
+            robots_text = response.read().decode(charset, errors="replace")
+        robots_text = re.sub(r"(?im)^User-agent:\s*\r?\n\s*([^#\s]+)\s*$", r"User-agent: \1", robots_text)
+        parser.parse(robots_text.splitlines())
     except (HTTPError, URLError, OSError) as error:
         print(f"Skipping {url}: cannot verify {robots_url} ({error})", file=sys.stderr)
         return False
