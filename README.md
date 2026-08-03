@@ -4,9 +4,23 @@
 
 ---
 
+## Thành Viên Nhóm B6-1
+
+| STT | Họ và tên             | Mã số sinh viên |
+| --- | ------------------------ | ------------------ |
+| 1   | Nguyễn Văn Đạt       | 2A202601969        |
+| 2   | Lê Hồng Đức          | 2A202601313        |
+| 3   | Nguyễn Kim Trung Đức  | 2A202601325        |
+| 4   | Toàn                    | 2A202601493        |
+| 5   | Phong                    | 2A202601077        |
+| 6   | Trần Nguyễn Thế Nhật | 2A202601155        |
+
+---
+
 ## Mục Tiêu
 
 Sau bài thực hành (lab) này, bạn cần có thể:
+
 - Giải thích độ tương tự cosine (cosine similarity) và dự đoán điểm tương đồng giữa các văn bản
 - Triển khai 3 chiến lược chia nhỏ (chunking) và so sánh ưu nhược điểm
 - Xây dựng kho lưu trữ vector (vector store) với các tính năng tìm kiếm (search), lọc (filter), và xóa (delete)
@@ -48,6 +62,7 @@ File `.env` được tự động nạp khi chạy `main.py`. Với các đoạn
 ### 1) Mặc định: Trình nhúng giả lập (Mock embedder)
 
 Không cần cài gì thêm ngoài:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -82,6 +97,7 @@ PY
 
 - Mô hình mặc định cho lựa chọn này là `text-embedding-3-small`
 - Có thể đổi mô hình bằng cách:
+
 ```bash
 export OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 ```
@@ -155,23 +171,25 @@ PY
 
 ## Các Giai Đoạn Của Lab
 
-| Giai Đoạn | Hoạt Động |
-|-----------|-----------|
-| Chuẩn bị tài liệu | Nhóm thu thập tài liệu theo **chủ đề cố định của lớp K3** (dịch vụ/quy định đại học), chuyển sang định dạng .md/.txt |
-| Lập trình cá nhân | Khởi động + hoàn thành tất cả TODO (cá nhân) |
-| Thiết kế chiến lược | Mỗi người thử chiến lược riêng, thống nhất 5 câu hỏi đánh giá |
-| So sánh trong nhóm | Chạy đánh giá (benchmark), so sánh kết quả, chuẩn bị thuyết trình |
-| Thuyết trình & thảo luận | Trình bày chiến lược + so sánh, thảo luận giữa các nhóm |
+| Giai Đoạn                  | Hoạt Động                                                                                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Chuẩn bị tài liệu        | Nhóm thu thập tài liệu theo**chủ đề cố định của lớp K3** (dịch vụ/quy định đại học), chuyển sang định dạng .md/.txt |
+| Lập trình cá nhân        | Khởi động + hoàn thành tất cả TODO (cá nhân)                                                                                            |
+| Thiết kế chiến lược     | Mỗi người thử chiến lược riêng, thống nhất 5 câu hỏi đánh giá                                                                     |
+| So sánh trong nhóm         | Chạy đánh giá (benchmark), so sánh kết quả, chuẩn bị thuyết trình                                                                     |
+| Thuyết trình & thảo luận | Trình bày chiến lược + so sánh, thảo luận giữa các nhóm                                                                               |
 
 ---
 
 ## Nhiệm Vụ Cá Nhân (Giai Đoạn 1)
 
 ### Đã lập trình sẵn (để tham khảo)
+
 - `Document` dataclass — cấu trúc lưu trữ văn bản + siêu dữ liệu (metadata)
 - `FixedSizeChunker` — chia nhỏ theo kích thước cố định với cơ chế cửa sổ trượt (sliding window)
 
 ### Cần lập trình (CẦN LÀM)
+
 - `SentenceChunker` — chia nhỏ theo ranh giới câu
 - `RecursiveChunker` — thử nghiệm từng dấu phân cách theo thứ tự
 - `compute_similarity` — tính độ tương tự cosine
@@ -198,22 +216,23 @@ PY
 Khi chạy đánh giá (benchmark), đừng chỉ hỏi **"code có chạy không?"** mà hãy tự kiểm tra 5 góc nhìn sau:
 
 1. **Độ chính xác của truy xuất (Retrieval Precision)**
+
    - Top-3 kết quả trả về có chứa chunk thực sự liên quan không?
    - Điểm số (Score) có giúp phân biệt được kết quả tốt và kết quả nhiễu không?
-
 2. **Tính mạch lạc của Chunk (Chunk Coherence)**
+
    - Chunk có giữ được trọn vẹn ý nghĩa không?
    - Chiến lược nào làm cho chunk dễ đọc và dễ truy xuất hơn?
-
 3. **Tính hữu dụng của Metadata (Metadata Utility)**
+
    - Hàm `search_with_filter()` có giúp tăng độ chính xác không?
    - Bộ lọc có quá khắt khe, làm mất đi các kết quả tốt không?
-
 4. **Chất lượng thông tin nền (Grounding Quality)**
+
    - Câu trả lời của tác tử (agent) có thực sự dựa trên ngữ cảnh được truy xuất không?
    - Bạn có thể chỉ ra chunk nào cung cấp thông tin cho câu trả lời không?
-
 5. **Tác động của chiến lược dữ liệu (Data Strategy Impact)**
+
    - Bộ tài liệu mà nhóm chọn có phù hợp với các câu hỏi đánh giá không?
    - Chiến lược chunking / metadata của bạn có phù hợp với chủ đề không?
 
@@ -225,11 +244,11 @@ Khi chạy đánh giá (benchmark), đừng chỉ hỏi **"code có chạy khôn
 
 Xem chi tiết tại `docs/SCORING.md`. Tóm tắt:
 
-| Phần | Điểm |
-|------|------|
-| Cá nhân (mã nguồn + phân tích) | 60 |
-| Nhóm (chiến lược + so sánh) | 40 |
-| **Tổng** | **100** |
+| Phần                                | Điểm        |
+| ------------------------------------ | ------------- |
+| Cá nhân (mã nguồn + phân tích) | 60            |
+| Nhóm (chiến lược + so sánh)     | 40            |
+| **Tổng**                      | **100** |
 
 ---
 

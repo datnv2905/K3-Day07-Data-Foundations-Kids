@@ -136,36 +136,17 @@ Any exceptions to fines or loan terms must be approved by VinUni senior leadersh
 
 2.2.   Circulation Privileges:
 
-User groups
-Number of items
-Loan Period
- Renewals
+Undergraduate students may borrow 3 items for 2 weeks and renew them 1 time.
 
-·       Undergraduate Students
-3
-2 weeks
-1 time
+Graduate students may borrow 5 items for 1 month and renew them 1 time.
 
-·       Graduate Students
-5
-1 month
-1 time
+VinUni faculty may borrow 5 items for 6 months and renew them 1 time.
 
-·       Faculty (VinUni)
-5
-6 months
-1 time
+Affiliated faculty and full-time or service contract staff may borrow 3 items for 2 weeks and renew them 1 time.
 
-·       Affiliated Faculty / Full-time & Service Contract Staff
-3
-2 weeks
-1 time
+Visiting students may borrow items based on library approval.
 
-·       Visiting Students
-Based on library approval
-
-·       Guests / Interns / Alumni
-     Not eligible to borrow
+Guests, interns, and alumni are not eligible to borrow.
 
 Note:
 

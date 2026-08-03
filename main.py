@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 from ingest import build_knowledge_base
 from src.agent import KnowledgeBaseAgent
+from src.chunking import SentenceChunker
 from src.embeddings import (
     EMBEDDING_PROVIDER_ENV,
     LOCAL_EMBEDDING_MODEL,
@@ -20,6 +21,7 @@ from src.embeddings import (
 # Thư mục dữ liệu mặc định cho demo = bộ khởi động cố định của lớp K3.
 # Đổi bằng biến môi trường: LAB_DATA_DIR=data/<thu-muc-cua-nhom> python3 main.py
 DEFAULT_DATA_DIR = "data/k3_university"
+DEMO_CHUNKER = SentenceChunker(max_sentences_per_chunk=1)
 
 
 def _select_embedder():
@@ -69,7 +71,8 @@ def run_manual_demo(question: str | None = None, data_dir: str | None = None) ->
         )
 
     # Pipeline cung cấp sẵn: parse front matter -> chunk -> gắn metadata -> nạp store.
-    store = build_knowledge_base(data_dir, embedding_fn=embedder)
+    print("Chiến lược chunking: sentence (tối đa 1 câu/chunk)")
+    store = build_knowledge_base(data_dir, embedding_fn=embedder, chunker=DEMO_CHUNKER)
     print(f"Đã nạp {store.get_collection_size()} chunk vào EmbeddingStore")
 
     print("\n=== Tìm kiếm (EmbeddingStore.search) ===")
