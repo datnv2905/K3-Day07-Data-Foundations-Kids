@@ -3,8 +3,12 @@ from __future__ import annotations
 import re
 
 from ingest import build_knowledge_base
-from src.chunking import FixedSizeChunker, RecursiveChunker, SentenceChunker
-from src.embeddings import LOCAL_EMBEDDING_MODEL, LocalEmbedder
+from src.NguyenVanDat_2A202601969.chunking import (
+    FixedSizeChunker,
+    RecursiveChunker,
+    SentenceChunker,
+)
+from src.NguyenVanDat_2A202601969.embeddings import LOCAL_EMBEDDING_MODEL, LocalEmbedder
 
 
 DATA_DIR = "data/k3_university"

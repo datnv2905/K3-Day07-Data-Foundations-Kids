@@ -7,9 +7,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from ingest import build_knowledge_base
-from src.agent import KnowledgeBaseAgent
-from src.chunking import SentenceChunker
-from src.embeddings import (
+from src.NguyenVanDat_2A202601969.agent import KnowledgeBaseAgent
+from src.NguyenVanDat_2A202601969.chunking import SentenceChunker
+from src.NguyenVanDat_2A202601969.embeddings import (
     EMBEDDING_PROVIDER_ENV,
     LOCAL_EMBEDDING_MODEL,
     OPENAI_EMBEDDING_MODEL,

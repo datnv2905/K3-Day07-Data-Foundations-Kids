@@ -150,10 +150,13 @@ PY
 ├── main.py               ← Điểm bắt đầu cho việc chạy thử thủ công (manual demo)
 ├── ingest.py             ← Pipeline nạp dữ liệu ĐÃ CUNG CẤP (front matter → chunk → metadata → store)
 ├── src/
-│   ├── chunking.py       ← Các lớp Chunking + hàm hỗ trợ tính độ tương tự
-│   ├── store.py          ← Lớp EmbeddingStore
-│   ├── agent.py          ← Lớp KnowledgeBaseAgent
-│   └── ...               ← Các module nhỏ hơn
+│   ├── __init__.py       ← Facade tương thích cho package mặc định
+│   ├── NguyenVanDat_2A202601969/
+│   │   ├── chunking.py   ← Các lớp Chunking + hàm hỗ trợ tính độ tương tự
+│   │   ├── store.py      ← Lớp EmbeddingStore
+│   │   ├── agent.py      ← Lớp KnowledgeBaseAgent
+│   │   └── ...           ← Các module cá nhân còn lại
+│   └── <thu-muc-thanh-vien-khac>/
 ├── data/                  ← Tài liệu mẫu + tài liệu do nhóm thu thập (.txt/.md)
 ├── tests/
 │   └── test_solution.py   ← Bộ kiểm thử (42 tests)
