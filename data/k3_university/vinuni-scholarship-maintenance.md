@@ -104,4 +104,3 @@ From 50%
 – Maintain the minimum CGPA 2.0 (Marginal) in the academic year under evaluation (calculated as the average of the two main semesters: Fall and Spring).
 
 – Complete the E.X.C.E.L self-evaluation and meet with the Advisor to discuss on the self-evaluation.
-
